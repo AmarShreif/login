@@ -1,0 +1,168 @@
+<section>
+  <h1 class="text-center display-4 fw-medium pt-1 m-0">Employee Management</h1>
+  <form [formGroup]="Login" (ngSubmit)="submitForm()">
+    <div>
+      <label for="name"></label>
+      <input
+        [ngClass]="{
+          'is-valid':
+            !Login.get('name')?.errors &&
+            (Login.get('name')?.touched || Login.get('name')?.dirty),
+          'is-invalid':
+            Login.get('name')?.errors &&
+            (Login.get('name')?.touched || Login.get('name')?.dirty)
+        }"
+        formControlName="name"
+        type="text"
+        name="name"
+        id="name"
+        class="form-control py-2"
+        placeholder="Name..."
+      />
+    </div>
+    <div>
+      <label for="email"></label>
+      <input
+        [ngClass]="{
+          'is-valid':
+            !Login.get('email')?.errors &&
+            (Login.get('email')?.touched || Login.get('email')?.dirty),
+          'is-invalid':
+            Login.get('email')?.errors &&
+            (Login.get('email')?.touched || Login.get('email')?.dirty)
+        }"
+        formControlName="email"
+        type="email"
+        name="email"
+        id="email"
+        class="form-control py-2"
+        placeholder="Email..."
+      />
+    </div>
+    <div>
+      <label for="skill"></label>
+      <input
+        [ngClass]="{
+          'is-valid':
+            !Login.get('skill')?.errors &&
+            (Login.get('skill')?.touched || Login.get('skill')?.dirty),
+          'is-invalid':
+            Login.get('skill')?.errors &&
+            (Login.get('skill')?.touched || Login.get('skill')?.dirty)
+        }"
+        formControlName="skill"
+        type="text"
+        name="skill"
+        id="skill"
+        class="form-control py-2 mb-3"
+        placeholder="Skill..."
+      />
+    </div>
+
+    <!-- <h2 class="mt-4">
+      Add Skills :
+      <button class="btn btn-success px-2 ms-2">
+        <i class="fa-solid fa-plus fs-5"></i>
+      </button>
+    </h2> -->
+
+    <div class="fs-5">
+      <label for="male">Male</label>
+      <input
+        type="radio"
+        formControlName="gender"
+        class="ms-2 cursor"
+        name="gender"
+        value="male"
+        id="male"
+      />
+    </div>
+    <div class="fs-5">
+      <label for="female">Female</label>
+      <input
+        type="radio"
+        formControlName="gender"
+        class="ms-2 cursor"
+        name="gender"
+        id="female"
+        value="female"
+      />
+    </div>
+    <button
+      type="submit"
+      class="py-2 fs-5 mt-3 px-5"
+      [ngClass]="isEditMode ? 'btn btn-warning' : 'btn btn-success'"
+    >
+      {{ isEditMode ? "Update Employee" : "Add Employee" }}
+    </button>
+  </form>
+  <div class="row my-3">
+    <div class="col-md-3">
+      <input
+        [(ngModel)]="searchName"
+        type="text"
+        class="form-control py-2"
+        placeholder="Filter By Name..."
+      />
+    </div>
+    <div class="col-md-3">
+      <input
+        [(ngModel)]="searchEmail"
+        type="text"
+        class="form-control py-2"
+        placeholder="Filter By Email..."
+      />
+    </div>
+    <div class="col-md-3">
+      <input
+        [(ngModel)]="searchGender"
+        type="text"
+        class="form-control py-2"
+        placeholder="Filter By Gender..."
+      />
+    </div>
+    <div class="col-md-3">
+      <input
+        [(ngModel)]="searchSkill"
+        type="text"
+        class="form-control py-2"
+        placeholder="Filter By Skills..."
+      />
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr class="fs-5">
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Skills</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (employee of filterEmployees ; track employee; let i = $index) {
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.gender }}</td>
+        <td>{{ employee.skill }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteEmployee(i)">
+            Delete
+          </button>
+          <button
+            (click)="editEmployee(i)"
+            class="btn btn-warning btn-sm ms-3 px-3"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>
