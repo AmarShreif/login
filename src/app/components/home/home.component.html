@@ -131,38 +131,43 @@
     </div>
   </div>
 
-  <table class="table">
-    <thead>
-      <tr class="fs-5">
-        <th>#</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>Skills</th>
-        <th>Options</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (employee of filterEmployees ; track employee; let i = $index) {
-      <tr>
-        <td>{{ i + 1 }}</td>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.gender }}</td>
-        <td>{{ employee.skill }}</td>
-        <td>
-          <button class="btn btn-danger btn-sm" (click)="deleteEmployee(i)">
-            Delete
-          </button>
-          <button
-            (click)="editEmployee(i)"
-            class="btn btn-warning btn-sm ms-3 px-3"
-          >
-            Edit
-          </button>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr class="fs-5">
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Skills</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of filterEmployees ; track employee; let i = $index) {
+        <tr>
+          <td data-label="#">{{ i + 1 }}</td>
+          <td data-label="Name">{{ employee.name }}</td>
+          <td data-label="Email">{{ employee.email }}</td>
+          <td data-label="Gender">{{ employee.gender }}</td>
+          <td data-label="Skills">{{ employee.skill }}</td>
+          <td data-label="Options">
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="deleteEmployee(i)"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+            <button
+              (click)="editEmployee(i)"
+              class="btn btn-outline-warning btn-sm ms-2"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </section>
